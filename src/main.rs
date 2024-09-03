@@ -12,18 +12,18 @@ struct Cli {
 }
 
 
-fn main() {    
+fn main() -> Result<(), Box< dyn std::error::Error>> {    
     let args = Cli::parse();
     let f = std::fs::File::open(&args.path).expect("could not read file");
+    print!("file:{:?}\n", f);
     let content = std::io::BufReader::new(f);
-
     for line in content.lines() {
-        let line = line.expect("invalid line");
-        if line.contains(&args.pattern) {
-            println!("{}", line);
-        }
+      let line = match line {
+          Ok(line) => {line},
+          Err(e) => {return Err(e.into());}
+      };
+      println!("{}", line);
     }
-
-
+    Ok(())
 
 }
