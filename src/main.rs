@@ -1,5 +1,7 @@
 use clap::Parser;
 use std::io::{self, BufReader, BufRead};
+use anyhow::{Context, Result};
+
 /// Search for a pattern in a file and display the lines that contain it.
 
 #[derive(Parser)]
@@ -12,10 +14,10 @@ struct Cli {
 }
 
 
-fn main() -> Result<(), Box< dyn std::error::Error>> {    
+fn main() -> Result<()> {    
     let args = Cli::parse();
-    let f = std::fs::File::open(&args.path).expect("could not read file");
-    print!("file:{:?}\n", f);
+    let f = std::fs::File::open(&args.path).with_context(|| format!("could not read file `{:?}`", &args.path))?;
+    // print!("file:{:?}\n", f);
     let content = std::io::BufReader::new(f);
     for line in content.lines() {
       let line = match line {
