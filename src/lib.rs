@@ -23,6 +23,7 @@ Ok(())
   fn test_find_matches() {
     let mut result = Vec::new();
     let con = BufReader::new(std::fs::File::open("text.txt").unwrap());
-   let _ = find_matches(con, "watch", &mut result);
-    assert_eq!(result, b"And watch the clouds go drifting by,");
+   let _ = find_matches(con, "find", &mut result);
+   
+    assert_eq!(result , b"We find our place, our harmony.\n");
   }
