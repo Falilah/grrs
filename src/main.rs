@@ -39,7 +39,7 @@ fn find_matches(content: BufReader<File>, pattern: &str, mut writer: impl std::i
         match line {
             Ok(line) => { 
                 if line.contains(pattern){
-                    writeln!(writer, "{}", line);    
+                    writeln!(writer, "{}", line).expect("can't read line");    
           }},
             Err(e) => {return Err(e.into());}
         };
