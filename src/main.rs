@@ -17,6 +17,10 @@ struct Cli {
 
 fn main() -> Result<()> {    
     let args = Cli::parse();
+    if args.pattern.is_empty(){
+        return Err(anyhow::anyhow!("empty pattern to search"));
+
+    }
     let f = std::fs::File::open(&args.path).with_context(|| format!("could not open file `{:?}`", &args.path))?;
 
     let content = std::io::BufReader::new(f);
