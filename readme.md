@@ -15,7 +15,7 @@ This Rust project is a demo project that demonstrates a basic pattern-matching f
 You can run the pattern finder from the command line by passing the _pattern_ and _file path_ as arguments respectively:
 
 for example:
-`cargo run <pattern> <file path>
+`cargo run <pattern> <file path>`
 
 
 reference: [Rust CLI book](https://rust-cli.github.io/book/index.html)
